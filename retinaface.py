@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import torch
 import torch.nn as nn
 from PIL import Image
@@ -64,12 +65,11 @@ class Retinaface(object):
 
         try:
             print("Backbone: ", self.facenet_backbone)
+
             self.known_face_encodings = np.load("encoding_data/{backbone}_face_encoding.npy".format(backbone=self.facenet_backbone))
             self.known_face_names     = np.load("encoding_data/{backbone}_names.npy".format(backbone=self.facenet_backbone))
         except:
-            # if not encoding:
-            #     print("exception")
-            pass
+            print("No face encodings exist")
 
     def generate(self):
 
@@ -205,6 +205,9 @@ class Retinaface(object):
 
                 face_encoding = self.facenet(crop_img)[0].cpu().numpy()
                 face_encodings.append(face_encoding)
+
+        if not os.path.exists("encoding_data/"):
+            os.makedirs("encoding_data/")
 
         np.save("encoding_data/{backbone}_face_encoding.npy".format(backbone=self.facenet_backbone),face_encodings)
         np.save("encoding_data/{backbone}_names.npy".format(backbone=self.facenet_backbone),names)

@@ -12,6 +12,10 @@ class Driver():
     def encode(self):
 
         faces_path = "img/"
+
+        if not os.path.exists(faces_path):
+            os.makedirs(faces_path)
+
         list_dir = os.listdir(faces_path)
 
         image_paths = []
