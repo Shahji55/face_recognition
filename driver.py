@@ -45,7 +45,7 @@ class Driver():
 
             for i, b in enumerate(boxes_conf_landms):
                 #b = list(map(int, b))
-                print(b)
+                #print(b)
 
                 x1 = int(b[0])
                 y1 = int(b[1])
@@ -68,5 +68,5 @@ if __name__ == "__main__":
     obj = Driver()
     obj.encode()
 
-    #img_path = "real_id.jpg"
+    #img_path = "img/real_id.jpg"
     #obj.predict(img_path)
